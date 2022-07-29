@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+  <script>
+    window.global = window
+  </script>
+  <script
+          crossorigin
+          src="https://unpkg.com/react@17/umd/react.development.js"
+  ></script>
+  <script
+          crossorigin
+          src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+  ></script>
+  <script src="{{url_for('static', filename='react-msaview.index.js')}}"></script>
+  <title>Team 3 Phylo-MSA</title>
+</head>
+<body>
+<div id="root"></div>
+<script>
+
+  const { MSAView, MSAModel } = window.ReactMSAView
+
+  // Pass msaFilehandle and treeFilehandle if you want to point at a URL of an MSA/tree
+  tree = "{{ tree|safe }}"
+  msa = `{{ msa|safe }}`
+  const model = MSAModel.create({
+    height: 700,
+    colWidth: 8,
+    id: `${Math.random()}`,
+    type: "MsaView",
+    colorSchemeName: "clustalx_dna",
+    treeAreaWidth: 700,
+    treeWidth: 5000,
+    rowHeight: 15,
+    data: {tree:tree, msa:msa}
+  });
+
+  // choose MSA width, calculate width of div/rendering area if needed beforehand
+  model.setWidth(1800)
+
+  ReactDOM.render(
+          React.createElement(MSAView, { model }),
+          document.getElementById('root'),
+  )
+</script>
+</body>
+</html>
