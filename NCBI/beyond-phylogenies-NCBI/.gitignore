@@ -1,4 +1,0 @@
-# ignore tmp files
-tmp/
-# ignore any cache files
-*__pycache__/
